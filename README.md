@@ -7,16 +7,14 @@ This is the  Chinese version of openFrameworks. It is useful to Chinese users to
 
 
 
-截图1 文档名称：
-Screemshots1 Folders name:
+截图1 文档名称 Screenshots1 Folders name:
 
-![image](https://www.dropbox.com/s/3qxzh0hbkiuejs8/Screenshot%202014-03-17%2017.51.36.png)
+![Screemshots1](https://raw.github.com/bestpaul1985/asset/master/readme_image/of_chinese01.png)
 
 
-截图2 注释翻译：
-Screemshots2 Commonts:
+截图2 注释翻译 Screenshots2 Commonts:
 
-![image](https://www.dropbox.com/s/ihdiw12klhn61xv/Screenshot%202014-03-17%2017.35.09.png)
+![Screemshots2](https://raw.github.com/bestpaul1985/asset/master/readme_image/of_chinese02.png)
 
 
 
