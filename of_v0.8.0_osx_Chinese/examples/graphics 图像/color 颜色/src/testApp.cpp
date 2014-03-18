@@ -83,20 +83,25 @@ void testApp::draw(){
     float hue = fmodf(ofGetElapsedTimef()*10,255);
     cout<<hue<<endl;
     int step = 5;
-    // step through horizontally
+    // step through horizontally 设置水平轴
     for ( int i=0; i<ofGetWidth(); i+=step )
     {
-        // step through vertically
+        // step through vertically 设置垂直轴
         for ( int j=0; j<ofGetHeight(); j+=step )
         {
             // set HSB using our hue value that changes over time, saturation from the X position (i), 
             // and brightness from the Y position (j). we also invert the Y value since it looks 
             // nicer if the dark/black colors are along the bottom.
+            
+            //设置色相随时间改变，饱和度随鼠标X坐标(i)改变，明度随鼠标Y坐标（j）改变。我们也会反转鼠标Y的数值使得黑色/暗色保持在底部，这会看起来好一点。
             ofColor c;
+            
             // the range of each of the arguments here is 0..255 so we map i and j to that range.
+            //每一个参数的范围必须在0-255之间，所以我们需要用一个映射把i和j限制在这个范围内。
             c.setHsb( hue, ofMap(i, 0,ofGetWidth(), 0,255), ofMap(j, ofGetHeight(),0, 0,255 ) );
             
             // assign the color and draw a rectangle
+            //分配颜色，并画矩形
             ofSetColor( c );
             ofRect( i, j, step-1, step-1 );
         }
@@ -107,6 +112,12 @@ void testApp::draw(){
     // calculate the color under the mouse, using the same calculations as when drawing the grid, 
     // using mouseX and mouseY in place of i and j; draw a rectangle with this color. here we use 
     // ofColor::fromHsb which allows us to set the HSB color in a single line of code.
+    
+    //现在我们会画一个大一些的矩形，它的颜色就是鼠标下面的颜色
+    
+    //计算鼠标下面的颜色，使用和画格子时同样的算法,
+    //使用mouseX 和 mouseY替换i 和 j；用这个颜色画一个矩形。这里我们使用了ofColor::formHsb， 它让我们可以通过一行代码设置HSB色彩。
+    
     ofColor color = ofColor::fromHsb(hue, 
                                      ofMap( mouseX, 0,ofGetWidth(), 0,255 ), 
                                      ofMap( mouseY, ofGetHeight(),0, 0,255 ) );
@@ -149,6 +160,7 @@ void testApp::keyReleased  (int key){
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
     // update mouse x and y percent when the mouse moves
+    // 当鼠标移动时，更新鼠标坐标X和Y的百分比
     mouseXPercent = float(x) / ofGetWidth();
     mouseYPercent = float(y) / ofGetHeight();
 }

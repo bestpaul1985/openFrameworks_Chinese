@@ -22,6 +22,9 @@ class testApp : public ofBaseApp{
 
         // member variables to store the current mouse X and Y position 
         // as a percentage of the width/height of the screen
+    
+        //建立一组变量用于存储鼠标坐标X和Y相对于窗口长和宽的百分比
+    
         float mouseXPercent, mouseYPercent;
 };
 	

@@ -40,6 +40,8 @@ void testApp::draw(){
 
 	//lets draw the key pressed as a tex and a vector both fill and no fill
 	//here we show how easy it is to get
+    //让我们同时画出我们按下的字符。这个字符会按照文本形式和的矢量图形方式呈现，其中矢量图形包括填充和没有填充的。
+    //我们将会展示实现这些有多么简单
 
 	string str = "";
 	str += char(letter);
@@ -47,6 +49,7 @@ void testApp::draw(){
 	testFont.drawString(str, 50, 250);
 
 	//okay lets get the character back as shapes
+    //好了，现在让我们把字母变成一个形状
 	testChar.setFilled(true);
     testChar.draw(200,250);
     testChar.setFilled(false);
@@ -54,6 +57,7 @@ void testApp::draw(){
 
 
     // we can also access the individual points
+    //我们甚至可以访问每一个点
 	ofFill();
 	ofPushMatrix();
 		ofTranslate(550, 250, 0);

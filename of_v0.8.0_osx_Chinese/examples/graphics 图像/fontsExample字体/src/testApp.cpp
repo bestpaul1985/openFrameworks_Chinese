@@ -4,7 +4,8 @@
 void testApp::setup(){	 
 	ofBackground(54, 54, 54, 255);
 	
-	//old OF default is 96 - but this results in fonts looking larger than in other programs. 
+	//old OF default is 96 - but this results in fonts looking larger than in other programs.
+    //旧的OF默认设置是96 - 但这个分辨率在别的程序中看起来偏大
 	ofTrueTypeFont::setGlobalDpi(72);
 
 	verdana14.loadFont("verdana.ttf", 14, true, true);
