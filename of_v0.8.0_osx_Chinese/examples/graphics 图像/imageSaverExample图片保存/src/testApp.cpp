@@ -8,6 +8,7 @@ void testApp::setup(){
 	cooper.loadFont("cooperBlack.ttf", 50);
 	phase = 0;
 	memset(snapString, 0, 255);		// clear the string by setting all chars to 0
+                                    // 通过让每个字符等于0来清零字符串
 }
 
 
@@ -51,6 +52,7 @@ void testApp::draw(){
 
 	if (bSnapshot == true){
 		// grab a rectangle at 200,200, width and height of 300,180
+        // 捕捉一个四边形位于200，200，长和宽分别为300，180
 		img.grabScreen(200,200,300,180);
 
 		string fileName = "snapshot_"+ofToString(10000+snapCounter)+".png";

@@ -88,6 +88,7 @@ void testApp::draw(){
 	}
 	
 	//lets draw a box with a trail
+    //让我们画一个跟着尾巴的方形
 	ofSetColor(245, 58, 135);
 	
 	ofRectangle boxBounds(32, 500, ofGetWidth()-32, 250);
@@ -133,7 +134,7 @@ void testApp::keyPressed(int key){
 	if( key=='r'){
 		pdfRendering = !pdfRendering;	
 		if( pdfRendering ){
-			ofSetFrameRate(12);  // so it doesn't generate tons of pages
+			ofSetFrameRate(12);  // so it doesn't generate tons of pages //这样我们就不会生成过多的页面
 			ofBeginSaveScreenAsPDF("recording-"+ofGetTimestampString()+".pdf", true);
 		}else{
 			ofSetFrameRate(60);

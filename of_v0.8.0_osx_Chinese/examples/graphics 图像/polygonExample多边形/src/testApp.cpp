@@ -40,14 +40,14 @@ void testApp::draw(){
 
 	//------(a)--------------------------------------
 	// 
-	// 		draw a star
+	// 		draw a star  画一个星星
 	//
-	// 		use poly winding odd, the default rule
+	// 		use poly winding odd, the default rule 使用OF_POLY_WINDING_ODD，一个默认的规则
 	//
-	// 		info about the winding rules is here:
+	// 		info about the winding rules is here: 更多信息请点击下面链接：
 	//		http://glprogramming.com/red/images/Image128.gif
 	// 
-	ofSetPolyMode(OF_POLY_WINDING_ODD);	// this is the normal mode
+	ofSetPolyMode(OF_POLY_WINDING_ODD);	// this is the normal mode 这是普通模式
 	ofBeginShape();
 		ofVertex(200,135);
 		ofVertex(15,135);
@@ -59,11 +59,11 @@ void testApp::draw(){
 	
 	//------(b)--------------------------------------
 	// 
-	// 		draw a star
+	// 		draw a star 再画一个星星
 	//
-	// 		use poly winding nonzero
+	// 		use poly winding nonzero 使用OF_POLY_WINDING_NONZERO
 	//
-	// 		info about the winding rules is here:
+	// 		info about the winding rules is here: 更多信息请点击下面链接：
 	//		http://glprogramming.com/red/images/Image128.gif
 	// 
 	ofSetHexColor(0xb5de10);
@@ -81,9 +81,9 @@ void testApp::draw(){
 	
 	//------(c)--------------------------------------
 	// 
-	// 		draw a star dynamically
+	// 		draw a star dynamically 画一个动态的星星
 	//
-	// 		use the mouse position as a pct
+	// 		use the mouse position as a pct 由鼠标坐标和窗口长和宽的比例去计算星星的点数和半径
 	//		to calc nPoints and internal point radius
 	//
 	float xPct = (float)(mouseX) / (float)(ofGetWidth());
@@ -102,11 +102,13 @@ void testApp::draw(){
 	for (int i = 0; i < nStarPts; i++){
 		if (i % 2 == 0) {
 			// inside point:
+            //内部点
 			float x = origx + innerRadius * cos(angle);
 			float y = origy + innerRadius * sin(angle);
 			ofVertex(x,y);
 		} else {
 			// outside point
+            //外部点
 			float x = origx + outerRadius * cos(angle);
 			float y = origy + outerRadius * sin(angle);
 			ofVertex(x,y);
@@ -118,9 +120,9 @@ void testApp::draw(){
 	
 	//------(d)--------------------------------------
 	// 
-	// 		poylgon of random points
+	// 		poylgon of random points 随机点的多边形
 	//
-	// 		lots of self intersection, 500 pts is a good stress test
+	// 		lots of self intersection, 500 pts is a good stress test 大量的内部交叉，500个点可以用于压力测试
 	// 
 	// 
 	ofSetHexColor(0x0cb0b6);
@@ -135,7 +137,7 @@ void testApp::draw(){
 	
 	//------(e)--------------------------------------
 	// 
-	// 		use sin cos and time to make some spirally shape
+	// 		use sin cos and time to make some spirally shape 用sin和cos与时间结合画螺旋的形状
 	//
 	ofPushMatrix();
 		ofTranslate(100,300,0);
@@ -159,11 +161,11 @@ void testApp::draw(){
 	
 	//------(f)--------------------------------------
 	// 
-	// 		ofCurveVertex
+	// 		ofCurveVertex 矢量曲线
 	// 
 	// 		because it uses catmul rom splines, we need to repeat the first and last 
 	// 		items so the curve actually goes through those points
-	//
+	//      因为我们使用Catmull-Rom splines （插值样条算法），所以我们需要重复第一个和最后一个项目，这样这些弧线最终会穿过这些锚点。
 
 	ofSetHexColor(0x2bdbe6);
 	ofBeginShape();
@@ -174,10 +176,14 @@ void testApp::draw(){
 			// sorry about all the if/states here, but to do catmull rom curves
 			// we need to duplicate the start and end points so the curve acutally 
 			// goes through them.
+            //很抱歉这些if状态，但是为了实现catmull rom curves（插值曲线算法），我们需要去重复这些开始和结束的点，这样这些弧线最终会穿过这些锚点。
 			
 			// for i == 0, we just call the vertex twice
 			// for i == nCurveVertices-1 (last point) we call vertex 0 twice
-			// otherwise just normal ofCurveVertex call
+            // otherwise just normal ofCurveVertex call
+            // 如果i == 0,我们执行这个矢量两次
+            // 如果i == nCurveVertices-1 （最后一个点），我们执行这个矢量两次
+            //其余的，我们就用普通方式
 			
 			if (i == 0){
 				ofCurveVertex(curveVertices[0].x, curveVertices[0].y); // we need to duplicate 0 for the curve to start at point 0
@@ -195,6 +201,7 @@ void testApp::draw(){
 	
 	
 	// show a faint the non-curve version of the same polygon:
+    // 我们用同样的数据画一条非曲线的轮廓线
 	ofEnableAlphaBlending();
 		ofNoFill();
 		ofSetColor(0,0,0,40);
@@ -222,7 +229,9 @@ void testApp::draw(){
 	// 		with ofBezierVertex we can draw a curve from the current vertex
 	//		through the the next three vertices we pass in.
 	//		(two control points and the final bezier point)
-	//		
+    
+    //      贝塞尔曲线
+	//		用ofBezierVertex我们可以通过输入3个参数改变一条现有的曲线
 	
 	float x0 = 500;
 	float y0 = 300;
@@ -259,7 +268,11 @@ void testApp::draw(){
 	// 		holes / ofNextContour
 	// 
 	// 		with ofNextContour we can create multi-contour shapes
-	// 		this allows us to draw holes, for example... 
+	// 		this allows us to draw holes, for example...
+    
+    //      孔洞 /ofNextContour
+    //      用ofNextContour我们可以创建多轮廓的形状
+    //      这让我们可以画洞，就像下面例子所示的。。。
 	//
 	ofFill();
 	ofSetHexColor(0xd3ffd3);
@@ -296,7 +309,14 @@ void testApp::draw(){
 	// 
 	// 		info about the winding rules is here:
 	//		http://glprogramming.com/red/images/Image128.gif
-	// 
+	//
+    
+    //      CSG / ofNextContour
+    //      选择不同的缠绕方式，我们甚至可以用ofNextContour执行有建设性的几何形状
+    //      要小心的是，你的轮廓是顺时针或逆时针会影响缠绕方式
+    
+    //      更多的csg想法：http://glprogramming.com/red/chapter11.html
+    //      关于缠绕组合：http://glprogramming.com/red/images/Image128.gif
 	ofNoFill();
 	
 	

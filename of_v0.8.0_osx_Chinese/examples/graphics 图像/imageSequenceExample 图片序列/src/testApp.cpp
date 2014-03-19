@@ -16,6 +16,14 @@
  
  gif from: http://probertson.livejournal.com/32350.html
  
+ 
+ 说明：
+ 
+ 在这个例子中我们将会从一个文件夹中加载一系列的图片。
+ 些图片都是按照顺序命名的，并且我们知道这些图片组成的动画的帧率是24fps。
+ 以24fps的帧率播放这些图片取决于这个应用的帧速率。
+ 我们可以把这个序列在播放单张图片和播放动画之间切换。
+ 
  */
 
 
@@ -27,6 +35,8 @@ void testApp::setup() {
                      
     // read the directory for the images
     // we know that they are named in seq
+    // 读取路径中的图片
+    // 我们知道这些图片都是按照顺序命名的
     ofDirectory dir;
     
     int nFiles = dir.listDir("plops");
@@ -46,14 +56,19 @@ void testApp::setup() {
     
     // this toggle will tell the sequence
     // be be indepent of the app fps
+    
+    // 这个切换会告诉序列每一桢都单独播放
     bFrameIndependent = true;
     
     // this will set the speed to play 
     // the animation back we set the
     // default to 24fps
+    //这里将会设置播放动画的的速度
+    //默认值是24fps
     sequenceFPS = 24;
 
-    // set the app fps 
+    // set the app fps
+    //设置应用的fps
     appFPS = 60;
     ofSetFrameRate(appFPS);
     
@@ -68,6 +83,7 @@ void testApp::update() {
 void testApp::draw() {
     
     // we need some images if not return
+    // 如果没有加载任何图片，我们会被告知
     if((int)images.size() <= 0) {
         ofSetColor(255);
         ofDrawBitmapString("No Images...", 150, ofGetHeight()/2);
@@ -75,7 +91,9 @@ void testApp::draw() {
     }
     
     // this is the total time of the animation based on fps
+    // 下面是计算播放动画所需时间的公式
     //float totalTime = images.size() / sequenceFPS;
+    
     
     
     int frameIndex = 0;
@@ -83,20 +101,25 @@ void testApp::draw() {
     if(bFrameIndependent) {
         // calculate the frame index based on the app time
         // and the desired sequence fps. then mod to wrap
+        
+        //计算时间和帧速率，得出这一帧需要播放的内容
         frameIndex = (int)(ofGetElapsedTimef() * sequenceFPS) % images.size();
     }
     else {
         // set the frame index based on the app frame
         // count. then mod to wrap.
+        //计算应用的总帧数，得出这一帧需要播放的内容
         frameIndex = ofGetFrameNum() % images.size();
     }
     
     // draw the image sequence at the new frame count
+    // 画出图片序列
     ofSetColor(255);
     images[frameIndex].draw(256, 36);
     
     
     // draw where we are in the sequence
+    // 画出图片序列的缩略图
     float x = 0;
     for(int offset = 0; offset < 5; offset++) {
 			int i = (frameIndex + offset) % images.size();
@@ -107,6 +130,7 @@ void testApp::draw() {
     
     
     // how fast is the app running and some other info
+    // 应用的一些信息，如应用的运行速度等
     ofSetColor(50);
     ofRect(0, 0, 200, 200);
     ofSetColor(200);
@@ -132,6 +156,7 @@ void testApp::keyPressed(int key){
     if(key == 't')            bFrameIndependent = !bFrameIndependent;
     
     // check for less than zero...
+    // 检查是否小于0
     sequenceFPS = MAX(sequenceFPS, 1);
     appFPS      = MAX(appFPS, 1);
     
