@@ -9,6 +9,7 @@ void testApp::setup(){
 	parameters.add(color.set("color",ofColor(127),ofColor(0,0),ofColor(255)));
 	gui.setup(parameters);
 	// by now needs to pass the gui parameter groups since the panel internally creates it's own group
+    //现在我们需要导入参数合集（parameter groups），因为面板内建了属于它自己的合集
 	sync.setup((ofParameterGroup&)gui.getParameter(),6667,"localhost",6666);
 	ofSetVerticalSync(true);
 }
