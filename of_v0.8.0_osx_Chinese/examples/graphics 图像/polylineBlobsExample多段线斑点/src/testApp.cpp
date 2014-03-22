@@ -39,10 +39,12 @@ void testApp::update() {
 		for(unsigned int i = 0; i < contourFinder.blobs.size(); i++) {
 			ofPolyline cur;
 			// add all the current vertices to cur polyline
+            // 将当前所有的矢量坐标加到一条多段线（polyline）中
 			cur.addVertices(contourFinder.blobs[i].pts);
 			cur.setClosed(true);
 			
 			// add the cur polyline to all these vector<ofPolyline>
+            //把上面的这条多段线保存到一个多段线向量中（vector<ofPolyline>）
 			polylines.push_back(cur);
 			smoothed.push_back(cur.getSmoothed(8));
 			resampled.push_back(cur.getResampledByCount(100).getSmoothed(8));
