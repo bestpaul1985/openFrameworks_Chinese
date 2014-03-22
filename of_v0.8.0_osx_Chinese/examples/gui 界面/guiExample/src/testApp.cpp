@@ -6,10 +6,11 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 
 	// we add this listener before setting up so the initial circle resolution is correct
+    // 我们需要在gui建立之前加入监听，这样才能得到正确的圆形分辨率
 	circleResolution.addListener(this, &testApp::circleResolutionChanged);
 	ringButton.addListener(this,&testApp::ringButtonPressed);
 
-	gui.setup(); // most of the time you don't need a name
+	gui.setup(); // most of the time you don't need a name 大多数情况，我们不需要命名它
 	gui.add(filled.setup("fill", true));
 	gui.add(radius.setup( "radius", 140, 10, 300 ));
 	gui.add(center.setup("center",ofVec2f(ofGetWidth()*.5,ofGetHeight()*.5),ofVec2f(0,0),ofVec2f(ofGetWidth(),ofGetHeight())));
@@ -65,9 +66,14 @@ void testApp::draw(){
 	
 	// auto draw?
 	// should the gui control hiding?
+    // 要自动画？
+    // 还是应该用gui控制是显示和隐藏？
 	if( bHide ){
 		gui.draw();
 	}
+    
+   
+
 }
 
 //--------------------------------------------------------------

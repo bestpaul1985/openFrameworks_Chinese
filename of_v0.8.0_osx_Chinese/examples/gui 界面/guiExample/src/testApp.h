@@ -39,5 +39,6 @@ public:
 	ofxPanel gui;
 
 	ofSoundPlayer ring;
+
 };
 

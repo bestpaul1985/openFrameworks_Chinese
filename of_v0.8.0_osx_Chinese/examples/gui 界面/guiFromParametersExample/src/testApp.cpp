@@ -6,10 +6,12 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	
 	// we add this listener before setting up so the initial circle resolution is correct
+    // 我们需要在gui建立之前加入监听，这样才能得到正确的圆形分辨率
+
 	circleResolution.addListener(this, &testApp::circleResolutionChanged);
 	ringButton.addListener(this,&testApp::ringButtonPressed);
 
-	gui.setup("panel"); // most of the time you don't need a name but don't forget to call setup
+	gui.setup("panel"); // most of the time you don't need a name but don't forget to call setup 大多数情况，我们不需要命名它，但是别忘记调用setup哦！
 	gui.add(filled.set("bFill", true));
 	gui.add(radius.set( "radius", 140, 10, 300 ));
 	gui.add(center.set("center",ofVec2f(ofGetWidth()*.5,ofGetHeight()*.5),ofVec2f(0,0),ofVec2f(ofGetWidth(),ofGetHeight())));
