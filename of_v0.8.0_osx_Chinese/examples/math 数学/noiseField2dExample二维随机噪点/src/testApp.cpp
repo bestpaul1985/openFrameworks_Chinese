@@ -71,18 +71,18 @@ void testApp::update() {
 		// use the strength of the field to determine a speed to move 使用场的强度来确定移动速度
 		// the speed is changing over time and velocity-space as well  速度和加速空间都会不断变化
     float speed = (1 + ofNoise(t, field.x, field.y)) / pollenMass;
-		// add the velocity of the particle to its position 把加速度加入到粒子的坐标中
+		// add the velocity of the particle to its position 把粒子的坐标和加速度相加
     x += ofLerp(-speed, speed, field.x);
     y += ofLerp(-speed, speed, field.y);
-		// if we've moved outside of the screen, reinitialize randomly 
+		// if we've moved outside of the screen, reinitialize randomly  如果点点已经移动到屏幕之外了，就随机初始化
     if(x < 0 || x > width || y < 0 || y > height) {
       x = ofRandom(0, width);
       y = ofRandom(0, height);
     }
-		// save the changes we made to the position
+		// save the changes we made to the position 保存我们对点点位置的改变
     points[i].x = x;
     points[i].y = y;
-		// add the current point to our collection of drawn points
+		// add the current point to our collection of drawn points 把新的点点加到我们需要画的点点矢量里
 		cloud.addVertex(ofVec2f(x, y));
 	}
 } 
@@ -92,7 +92,7 @@ void testApp::draw() {
 	ofBackground(255);
   if(debugMode) {
     ofSetColor(0);
-		// draw a vector field for the debug screen
+		// draw a vector field for the debug screen 绘制出矢量场用于调试屏幕
     for(int i = 0; i < width; i += step) {
       for(int j = 0; j < height; j += step) {
 				ofVec2f field = getField(ofVec2f(i, j));
@@ -103,13 +103,13 @@ void testApp::draw() {
         ofPopMatrix();
       }
     }
-		// draw the points as circles
+		// draw the points as circles 用圆形作为绘制的点
 		ofSetColor(ofColor::red);
 		for(int i = 0; i < nPoints; i++) {
       ofCircle(points[i], 2);
 		}
   } else {
-		// when not in debug mode, draw all the points to the screen
+		// when not in debug mode, draw all the points to the screen 如果不是在调试模式，绘制所有的点点到屏幕上
     ofSetColor(0, 10);
 		cloud.draw();
 	}
@@ -119,7 +119,7 @@ void testApp::draw() {
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key) {
-	// when you hit a key, draw the debug screen
+	// when you hit a key, draw the debug screen 如果你点击一个按键，切换到调试模式
   debugMode = !debugMode;
 }
 
@@ -140,7 +140,7 @@ void testApp::mouseDragged(int x, int y, int button) {
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button) {
-	// when you click the mouse, reset all the points
+	// when you click the mouse, reset all the points 如果点击鼠标，重置所有的点点
   setup();
 }
 
