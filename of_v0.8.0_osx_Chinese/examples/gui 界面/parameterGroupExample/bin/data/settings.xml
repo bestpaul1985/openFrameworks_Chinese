@@ -1,0 +1,17 @@
+<settings>
+	<vSync>1</vSync>
+	<renderer1>
+		<size>10</size>
+		<number>2</number>
+		<position>410.922, 456.13</position>
+		<color>191, 189, 127, 255</color>
+		<frameNum>16584</frameNum>
+	</renderer1>
+	<renderer2>
+		<size>10</size>
+		<number>2</number>
+		<position>512, 384</position>
+		<color>127, 127, 127, 255</color>
+		<frameNum>16584</frameNum>
+	</renderer2>
+</settings>

@@ -72,18 +72,24 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 	ofPushMatrix();
 	ofTranslate(x,y,0);
 	
-	// Use different alphas if we're actively maniupulating me. 
+	// Use different alphas if we're actively maniupulating me.
+    // 使用不同的透明度，如果我们选择下面的不同参数
+
 	float sliderAlpha = (bHasFocus) ? 128:64;
 	float spineAlpha  = (bHasFocus) ? 192:128;
 	float thumbAlpha  = (bHasFocus) ? 255:160;
 	
 	// draw box outline
+    // 画一个方形外框
+
 	ofNoFill();
 	ofSetLineWidth(1.0);
 	ofSetColor(64,64,64, sliderAlpha); 
 	ofRect(0,0, width,height); 
 	
 	// draw spine
+    // 画一个柱
+
 	ofSetLineWidth(1.0);
 	ofSetColor(0,0,0, spineAlpha); 
 	if (bVertical){
@@ -93,6 +99,8 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 	}
 	
 	// draw thumb
+    // 画一个小按钮
+
 	ofSetLineWidth(5.0);
 	ofSetColor(0,0,0, thumbAlpha);
 	if (bVertical){
@@ -105,7 +113,9 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 	
 	
 	
-	// draw numeric value 
+	// draw numeric value
+    //画出数值
+
 	if (bHasFocus){
 		ofSetColor(0); 
 	} else {
@@ -129,13 +139,17 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 //----------------------------------------------------
 float ofxSimpleSlider::getValue(){
 	// THIS IS THE MAIN WAY YOU GET THE VALUE FROM THE SLIDER!
-	float out = ofMap(percent, 0,1, lowValue,highValue, true); 
+    //这是我们得到滑块数值的主要方式
+
+	float out = ofMap(percent, 0,1, lowValue,highValue, true);
 	return out;
 }
 
 
 //----------------------------------------------------
-// Probably not used very much. 
+// Probably not used very much.
+// 也许不是太常用
+
 float ofxSimpleSlider::getLowValue(){
 	return lowValue;
 }
@@ -147,7 +161,9 @@ float ofxSimpleSlider::getPercent(){
 }
 
 //----------------------------------------------------
-// Probably not used very much. 
+// Probably not used very much.
+// 也许不是太常用
+
 void ofxSimpleSlider::setLowValue(float lv){
 	lowValue = lv;
 }
@@ -155,7 +171,9 @@ void ofxSimpleSlider::setHighValue(float hv){
 	highValue = hv; 
 }
 void ofxSimpleSlider::setPercent (float p){
-	// Set the slider's percentage from the outside. 
+	// Set the slider's percentage from the outside.
+    // 从外部设置滑块的百分别
+
 	p = ofClamp(p, 0,1);
 	percent	= p;
 }
@@ -191,6 +209,8 @@ void ofxSimpleSlider::mouseReleased(ofMouseEventArgs& event){
 //----------------------------------------------------
 void ofxSimpleSlider::updatePercentFromMouse (int mx, int my){
 	// Given the mouse value, compute the percentage.
+    // 给到鼠标数值，然后计算百分比
+
 	if (bVertical){
 		percent = ofMap(my, y, y+height, 1,0, true);
 	} else {

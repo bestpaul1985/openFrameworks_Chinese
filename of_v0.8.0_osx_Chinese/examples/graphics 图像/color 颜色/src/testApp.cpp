@@ -127,6 +127,7 @@ void testApp::draw(){
     ofRect( mouseX, mouseY, 100, 100 );
     
     // now draw a white border around the rectangle
+    // 现在为每个四边形画一个边框
     ofNoFill();
     ofSetHexColor(0xFFFFFF);
     ofRect( mouseX, mouseY, 100, 100 );
@@ -134,6 +135,8 @@ void testApp::draw(){
     
     // finally we draw text over the rectangle giving the resulting HSB and RGB values 
     // under the mouse
+    // 最后我们用文字标出HSB和RGB的值
+    // 在底部显示
     ofSetHexColor(0xFFFFFF);
     ofDrawBitmapString("HSB: "+ofToString(int(hue))+
                        " "+ofToString(int(color.getSaturation()))+

@@ -27,6 +27,8 @@ void testApp::vSyncChanged(bool & vSync){
 void testApp::update(){
 	// frameNum is a readonly parameter so this will fail to compile
 	// unless we are inside the CirclesRenderer class
+    // 因为frameNum 是一个只读参数，所以这会导致编译失败，
+    // 除非我们是在CirclesRenderer类里面这么做。
 	// renderer.frameNum = 5;
 }
 

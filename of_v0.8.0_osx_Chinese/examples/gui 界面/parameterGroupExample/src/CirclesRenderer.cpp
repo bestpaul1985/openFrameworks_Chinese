@@ -9,6 +9,7 @@
 
 CirclesRenderer::CirclesRenderer() {
 	// TODO Auto-generated constructor stub
+    // 自动生成构造函数存档
 
 }
 
@@ -26,8 +27,10 @@ void CirclesRenderer::setup(string name){
 }
 
 void CirclesRenderer::draw(){
-	// this will work only inside CirclesRenderer class
+	// this will work only inside CirclesRenderer
 	// since it's a readonly property
+    // 这些只会在CirclesRenderer这个类中工作，因为它们是只读属性
+    
 	frameNum ++;
 	ofSetColor(color);
 	for(int i=0;i<number;i++){
