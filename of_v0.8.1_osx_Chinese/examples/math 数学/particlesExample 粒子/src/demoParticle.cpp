@@ -18,6 +18,7 @@ void demoParticle::setAttractPoints( vector <ofPoint> * attract ){
 //------------------------------------------------------------------
 void demoParticle::reset(){
 	//the unique val allows us to set properties slightly differently for each particle
+    //给粒子一个随机的数字
 	uniqueVal = ofRandom(-10000, 10000);
 	
 	pos.x = ofRandomWidth();
@@ -33,6 +34,7 @@ void demoParticle::reset(){
 	if( mode == PARTICLE_MODE_NOISE ){
 		drag  = ofRandom(0.97, 0.99);
 		vel.y = fabs(vel.y) * 3.0; //make the particles all be going down
+                                //让粒子都向下移动
 	}else{
 		drag  = ofRandom(0.95, 0.998);	
 	}
@@ -42,28 +44,34 @@ void demoParticle::reset(){
 void demoParticle::update(){
 
 	//1 - APPLY THE FORCES BASED ON WHICH MODE WE ARE IN 
-	
+	//1 - 加载的力取决于我们选择何种模式
 	if( mode == PARTICLE_MODE_ATTRACT ){
 		ofPoint attractPt(ofGetMouseX(), ofGetMouseY());
 		frc = attractPt-pos; // we get the attraction force/vector by looking at the mouse pos relative to our pos
+                            // 粒子获得的引力是通过计算鼠标位置和粒子位置的关系得到的
 		frc.normalize(); //by normalizing we disregard how close the particle is to the attraction point 
-		
+                        //通过初始化力，我们忽略了粒子和吸引点之间的距离。
 		vel *= drag; //apply drag
+                    //应用拖拽
 		vel += frc * 0.6; //apply force
+                    //应用力
 	}
 	else if( mode == PARTICLE_MODE_REPEL ){
 		ofPoint attractPt(ofGetMouseX(), ofGetMouseY());
 		frc = attractPt-pos; 
 		
 		//let get the distance and only repel points close to the mouse
+        //通过计算鼠标和粒子的距离，得出在鼠标影响的范围内的点
 		float dist = frc.length();
 		frc.normalize(); 
 		
 		vel *= drag; 
 		if( dist < 150 ){
-			vel += -frc * 0.6; //notice the frc is negative 
+			vel += -frc * 0.6; //notice the frc is negative
+                                //注意，力是相反的
 		}else{
-			//if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy. 			
+			//if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy.
+            //如果粒子不够靠近，我们可以用噪点制造一些随机移动。这就是为什么我们前面创建了一个随机数字,它让每个粒子的移动略微不同。
 			frc.x = ofSignedNoise(uniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
 			frc.y = ofSignedNoise(uniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
 			vel += frc * 0.04;
@@ -73,6 +81,9 @@ void demoParticle::update(){
 		//lets simulate falling snow 
 		//the fake wind is meant to add a shift to the particles based on where in x they are
 		//we add pos.y as an arg so to prevent obvious vertical banding around x values - try removing the pos.y * 0.006 to see the banding
+        //下面，我们会用粒子模拟下雪的效果
+        //为了模拟风对雪的影响，我们会在x轴上加入一个移动效果
+        //我们对Y坐标设定了
 		float fakeWindX = ofSignedNoise(pos.x * 0.003, pos.y * 0.006, ofGetElapsedTimef() * 0.6);
 		
 		frc.x = fakeWindX * 0.25 + ofSignedNoise(uniqueVal, pos.y * 0.04) * 0.6;

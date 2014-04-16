@@ -16,7 +16,8 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::resetParticles(){
 
-	//these are the attraction points used in the forth demo 
+	//these are the attraction points used in the forth demo
+    //让我们先清空所有的吸引点，以防止这些吸引点在之前使用过
 	attractPoints.clear();
 	for(int i = 0; i < 4; i++){
 		attractPoints.push_back( ofPoint( ofMap(i, 0, 4, 100, ofGetWidth()-100) , ofRandom(100, ofGetHeight()-100) ) );
@@ -39,6 +40,7 @@ void ofApp::update(){
 	}
 	
 	//lets add a bit of movement to the attract points
+    //让吸引点动起来
 	for(unsigned int i = 0; i < attractPointsWithMovement.size(); i++){
 		attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
 		attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
