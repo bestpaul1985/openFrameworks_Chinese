@@ -73,18 +73,21 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 	ofPushMatrix();
 	ofTranslate(x,y,0);
 	
-	// Use different alphas if we're actively maniupulating me. 
+	// Use different alphas if we're actively maniupulating me.
+    // 改变透明度如果我们激活了别的simpleSlider;
 	float sliderAlpha = (bHasFocus) ? 128:64;
 	float spineAlpha  = (bHasFocus) ? 192:128;
 	float thumbAlpha  = (bHasFocus) ? 255:160;
 	
 	// draw box outline
+    // 外框
 	ofNoFill();
 	ofSetLineWidth(1.0);
 	ofSetColor(64,64,64, sliderAlpha); 
 	ofRect(0,0, width,height); 
 	
 	// draw spine
+    // 滑动条
 	ofSetLineWidth(1.0);
 	ofSetColor(0,0,0, spineAlpha); 
 	if (bVertical){
@@ -94,6 +97,7 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 	}
 	
 	// draw thumb
+    // 滑钮
 	ofSetLineWidth(5.0);
 	ofSetColor(0,0,0, thumbAlpha);
 	if (bVertical){
@@ -104,7 +108,8 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 		ofLine(thumbX,0, thumbX,height); 
 	}
 	
-	// draw numeric value 
+	// draw numeric value
+    // 数值
 	if (bHasFocus){
 		ofSetColor(0); 
 	} else {
@@ -126,13 +131,15 @@ void ofxSimpleSlider::draw(ofEventArgs& event){
 //----------------------------------------------------
 float ofxSimpleSlider::getValue(){
 	// THIS IS THE MAIN WAY YOU GET THE VALUE FROM THE SLIDER!
+    //这是我们得到数值的主要方法
 	float out = ofMap(percent, 0,1, lowValue,highValue, true); 
 	return out;
 }
 
 
 //----------------------------------------------------
-// Probably not used very much. 
+// Probably not used very much.
+//不常用代码
 float ofxSimpleSlider::getLowValue(){
 	return lowValue;
 }
@@ -144,7 +151,9 @@ float ofxSimpleSlider::getPercent(){
 }
 
 //----------------------------------------------------
-// Probably not used very much. 
+// Probably not used very much.
+//不常用代码
+
 void ofxSimpleSlider::setLowValue(float lv){
 	lowValue = lv;
 }
@@ -188,6 +197,7 @@ void ofxSimpleSlider::mouseReleased(ofMouseEventArgs& event){
 //----------------------------------------------------
 void ofxSimpleSlider::updatePercentFromMouse (int mx, int my){
 	// Given the mouse value, compute the percentage.
+    // 取得鼠标位置，计算百分比
 	if (bVertical){
 		percent = ofMap(my, y, y+height, 1,0, true);
 	} else {

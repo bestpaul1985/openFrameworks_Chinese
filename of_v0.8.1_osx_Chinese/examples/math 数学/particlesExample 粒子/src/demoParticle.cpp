@@ -93,6 +93,7 @@ void demoParticle::update(){
 		vel += frc * 0.4;
 		
 		//we do this so as to skip the bounds check for the bottom and make the particles go back to the top of the screen
+        //当粒子到达窗口底部的时候，让粒子返回窗口顶部
 		if( pos.y + vel.y > ofGetHeight() ){
 			pos.y -= ofGetHeight();
 		}
@@ -101,7 +102,8 @@ void demoParticle::update(){
 		
 		if( attractPoints ){
 
-			//1 - find closest attractPoint 
+			//1 - find closest attractPoint
+            //1 - 找到最接近的吸引点
 			ofPoint closestPt;
 			int closest = -1; 
 			float closestDist = 9999999;
@@ -115,20 +117,25 @@ void demoParticle::update(){
 			}
 			
 			//2 - if we have a closest point - lets calcuate the force towards it
+            //2 - 找到最接近的吸引点后，计算吸引力大小
 			if( closest != -1 ){
 				closestPt = attractPoints->at(closest);				
 				float dist = sqrt(closestDist);
 				
-				//in this case we don't normalize as we want to have the force proportional to distance 
+				//in this case we don't normalize as we want to have the force proportional to distance
+                //在这个例子中，当我们更具距离的差值来计算吸引力
 				frc = closestPt - pos;
 		
 				vel *= drag;
 				 
 				//lets also limit our attraction to a certain distance and don't apply if 'f' key is pressed
+                //让我们限制吸引点的吸引范围
+                //当按下f键的时候让吸引点停止工作
 				if( dist < 300 && dist > 40 && !ofGetKeyPressed('f') ){
 					vel += frc * 0.003;
 				}else{
-					//if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy. 			
+					//if the particles are not close to us, lets add a little bit of random movement using noise. this is where uniqueVal comes in handy.
+                    //如果粒子不够靠近，我们可以用噪点制造一些随机移动。这就是为什么我们前面创建了一个随机数字,它让每个粒子的移动略微不同。
 					frc.x = ofSignedNoise(uniqueVal, pos.y * 0.01, ofGetElapsedTimef()*0.2);
 					frc.y = ofSignedNoise(uniqueVal, pos.x * 0.01, ofGetElapsedTimef()*0.2);
 					vel += frc * 0.4;
@@ -142,12 +149,14 @@ void demoParticle::update(){
 	
 	
 	//2 - UPDATE OUR POSITION
-	
+	//2 - 更新粒子的位置
 	pos += vel; 
 	
 	
-	//3 - (optional) LIMIT THE PARTICLES TO STAY ON SCREEN 
+	//3 - (optional) LIMIT THE PARTICLES TO STAY ON SCREEN
+    //3- （可选）把粒子限制在窗口范围内
 	//we could also pass in bounds to check - or alternatively do this at the ofApp level
+    //我们可以现在就用一个框来限制粒子的运动范围-或者在ofApp一级里面做这件事
 	if( pos.x > ofGetWidth() ){
 		pos.x = ofGetWidth();
 		vel.x *= -1.0;

@@ -37,7 +37,11 @@ void ofApp::update(){
     // (speed.getValue() != preSpeed)
     // so we look at the change and if the change is greater then a certain
     // amount we clear. 
-    
+    // 如果速度出现变化，我们需要清空所有的线
+    //我们无法测试用同一个float来查看速度是否变化
+    // (speed.getValue() != preSpeed)
+    // 所以我们用一个preSpeed记录下之前的速度，这样我们就可以比较现在的速度和之前的速度的不同
+    // 如果速度的变化大到一定成都，我们就清空线条
 	if( fabs(speed.getValue() - preSpeed) > 0.00001f ){
 		speedChanged();
 	}
