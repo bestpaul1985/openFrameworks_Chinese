@@ -1,8 +1,8 @@
 openFrameworks_Chinese
 ======================
-这是openFrameworks的中文翻译版。它用于让openFrameworks的中文用户快速开始，并且方便学习OF。现在翻译的OF版本是8.0，中文版本的更新将会和官方版本同步。
+这是openFrameworks的中文翻译版。它用于让openFrameworks的中文用户快速开始，并且方便学习OF。现在翻译的OF版本是0.8.1，中文版本的更新将会和官方版本同步。
 
-This is the  Chinese version of openFrameworks. It is useful to Chinese users to quick start and easily learn openFrameworks. Current translated OF version is 8.0. Chinese version will follow official OF version keeping updating 
+This is the  Chinese version of openFrameworks. It is useful to Chinese users to quick start and easily learn openFrameworks. Current translated OF version is 0.8.1. Chinese version will follow official OF version keeping updating 
 
 
 
