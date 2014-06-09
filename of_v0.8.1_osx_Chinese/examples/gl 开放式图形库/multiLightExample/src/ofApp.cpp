@@ -1,16 +1,16 @@
 //看各种灯光的设置 http://www.openframeworks.cc/documentation/gl/ofLight.html
-#include "ofApp.h"
+#include "testApp.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    //ofEnableDepthTest() 使用openGL的z-buffer功能 - 就是存储每个象素的z-value并且每帧都会清除再更新z坐标
-	ofSetVerticalSync(true);
-	ofSetFrameRate(60);
-	ofBackground(10, 10, 10);
-	ofEnableDepthTest();
+    
+	ofSetVerticalSync(true);    //ofSetVerticalSync()-同步更新屏幕重绘和屏幕的垂直刷新,
+	ofSetFrameRate(60);         //设置分辨率
+	ofBackground(10, 10, 10);   //设置背景颜色
+	ofEnableDepthTest();        //ofEnableDepthTest()-使用openGL的z-buffer功能 - 就是存储每个象素的z-value并且每帧都会清除再更新z坐标
     
     // turn on smooth lighting //
-	// 使用平滑灯光
+	// 使用平滑 (柔和？）的灯光
     bSmoothLighting     = true;
     ofSetSmoothLighting(true);
     
@@ -26,7 +26,7 @@ void ofApp::setup(){
     
     // Point lights emit light in all directions //
     // set the diffuse color, color reflected from the light source //
-	// 灯光向各个方向个方向发光
+	// 灯光向个方向发光
     // 设置漫反射颜色，颜色从光源反射
     pointLight.setDiffuseColor( ofColor(0.f, 255.f, 0.f));
     
@@ -72,7 +72,9 @@ void ofApp::setup(){
     // shininess is a value between 0 - 128, 128 being the most shiny //
 	// 闪亮度范围在0-128，128最亮
 	material.setShininess( 120 );
+    
     // the light highlight of the material //
+    // 看上面的解释
 	material.setSpecularColor(ofColor(255, 255, 255, 255));
 	
 	bPointLight = bSpotLight = bDirLight = true;
@@ -127,7 +129,7 @@ void ofApp::draw(){
 	ofDrawSphere( 0,0,0, radius);
     ofPopMatrix();
 	
-	// 画旋转的立方体
+	// 画旋转的小立方体
 	ofPushMatrix();
 	ofTranslate(300, 300, cos(ofGetElapsedTimef()*1.4) * 300.f);
 	ofRotate(ofGetElapsedTimef()*.6 * RAD_TO_DEG, 1, 0, 0);
@@ -135,7 +137,7 @@ void ofApp::draw(){
 	ofDrawBox(0, 0, 0, 60);
 	ofPopMatrix();
 	
-	// 画另外一个立方体
+	// 画另外一个大立方体
 	ofPushMatrix();
 	ofTranslate(center.x, center.y, -900);
 	ofRotate(ofGetElapsedTimef() * .2 * RAD_TO_DEG, 0, 1, 0);
@@ -177,7 +179,7 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-	//各种光线的设置，别忘了试试
+	//各种光线的设置，自己试试看
     switch (key) {
 		case '1':
 			bPointLight = !bPointLight;
@@ -202,7 +204,7 @@ void ofApp::keyPressed(int key){
             break;
         case OF_KEY_UP:
             // setSpotlightCutOff is clamped between 0 - 90 degrees //
-			// setSpotlightCutOff范围在0值90度
+			// setSpotlightCutOff范围在0至90度
             spotLight.setSpotlightCutOff(spotLight.getSpotlightCutOff()+1);
             break;
         case OF_KEY_DOWN:
